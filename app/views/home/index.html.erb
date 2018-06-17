@@ -3,4 +3,16 @@
 
 <br><br>
 
-<%= @coins %>
+<% @coins.each do |c| %>
+  <% @my_coins.each do |a| %>
+    <% if a == c["symbol"] %>
+      <p></p><%= c["name"] %>. Price: $<%= c["price_usd"] %></p>
+    <% end %>
+  <% end %>
+<% end %>
+
+<!---
+
+
+
+-->

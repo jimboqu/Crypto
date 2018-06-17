@@ -1,0 +1,19 @@
+<h3>Lookup Crypto Currency through symbol</h3>
+
+<%= form_tag lookup_path, method: "POST" do %>
+
+<%= text_field_tag 'sym', nil, placeholder: "Enter symbol", size: 50 %>
+
+<%= submit_tag "Find quotes" %>
+
+<% end %>
+
+<% if @look %>
+<% @foundcoins.each do |c| %>
+  
+    <% if @look == c["symbol"] %>
+      <p></p><%= c["name"] %>. Price: $<%= c["price_usd"] %></p>
+    <% end %>
+ 
+<% end %>
+<% end %>
