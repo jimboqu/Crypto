@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cryptos
   devise_for :users
   devise_for :views
   get 'home/index'
