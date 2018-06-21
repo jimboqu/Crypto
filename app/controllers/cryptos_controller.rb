@@ -4,6 +4,16 @@ class CryptosController < ApplicationController
   # GET /cryptos
   # GET /cryptos.json
   def index
+    require 'net/http'
+    require 'json'
+    @url = "https://api.coinmarketcap.com/v1/ticker/"
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @foundcrypto = JSON.parse(@response)
+    @look = params[:sym]
+    if @look
+      @look = @look.upcase
+    end
     @cryptos = Crypto.where(user_id: current_user.id)
   end
 
@@ -26,9 +36,10 @@ class CryptosController < ApplicationController
   # POST /cryptos.json
   def create
     @crypto = Crypto.new(crypto_params)
-
+    
     respond_to do |format|
       if @crypto.save
+        @crypto.symbol.upcase
         format.html { redirect_to @crypto, notice: 'Crypto was successfully created.' }
         format.json { render :show, status: :created, location: @crypto }
       else
