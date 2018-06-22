@@ -7,6 +7,8 @@
     <tr>
       <th>Name</th>
       <th>Symbol</th>
+      <th>Current Price</th>
+      <th>Total Value</th>
        <th>Cost per</th>
       <th>Amount owned</th>
      
@@ -22,6 +24,8 @@
         <% if c["symbol"] == crypto.symbol.upcase %>
         <td><%= link_to c["name"], crypto %></td>
         <td><%= c["symbol"] %></td>
+        <td>$<%= c["price_usd"].to_f.round(4) %></td>
+        <td>$<%= c["price_usd"].to_d * crypto.amount_owned.to_d.round(1) %></td>
       <% end %>
  
 <% end %>
